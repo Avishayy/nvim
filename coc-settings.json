@@ -1,0 +1,4 @@
+{
+    "clangd.semanticHighlighting": true,
+    "coc.preferences.formatOnSaveFiletypes": [ "rust" ]
+}
