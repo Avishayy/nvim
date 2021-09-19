@@ -224,7 +224,7 @@ let g:lightline = {
     \ 'component_function': {
     \     'filename': 'LightlineFilename',
     \     'cocstauts': 'coc#status',
-    \     'current_function': 'nvim_treesitter#statusline',
+    \     'current_function': 'TreeSitterStatusLine',
     \     'zoom': 'zoom#statusline'
     \ },
     \ 'colorscheme': 'base16'
@@ -238,6 +238,14 @@ function! LightlineFilename()
     
     let filename = expand('%:.')
     return !empty(filename) ? filename : "[No Name]"
+endfunction
+
+" I don't want the last colon in the statusline, it's distracting
+function! TreeSitterStatusLine()
+   let treesitter_statusline = nvim_treesitter#statusline()
+   if type(treesitter_statusline) == v:t_string
+     return treesitter_statusline[:-2] 
+   endif
 endfunction
 
 Plug 'itchyny/lightline.vim'
