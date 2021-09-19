@@ -129,7 +129,7 @@ call plug#begin()
 
     " Mappings for CoCList
     " Show all diagnostics.
-    nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+    nnoremap <silent><nowait> <space>d  :<C-u>CocList diagnostics<cr>
     " Manage extensions.
     nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
     " Show commands.
@@ -143,29 +143,55 @@ call plug#begin()
     " Do default action for previous item.
     nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
     " Resume latest coc list.
-    nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+    nnoremap <silent><nowait> <space>l  :<C-u>CocListResume<CR>
 
 
-    let g:coc_global_extensions = [ 'coc-clangd', 'coc-rust-analyzer' ]
+    let g:coc_global_extensions = [ 'coc-clangd', 'coc-rust-analyzer', 'coc-tsserver', 'coc-pyright' ]
 " }}}
 
 " fzf {{{
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
 
+    function! s:build_quickfix_list(lines)
+      call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+      copen
+      cc
+    endfunction
+
+    let g:fzf_action = {
+      \ 'ctrl-q': function('s:build_quickfix_list'),
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
+
+    command! -bang -nargs=* Rg call fzf#vim#grep("rg --no-ignore --hidden --glob '!.git' --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
+ 
+    let g:fzf_files_options = '--preview "(cat {}) 2> /dev/null "'
     nmap <C-P> :Files<CR>
 " }}}
 
 " Allows to quickly manipulate surrounding objects
 Plug 'tpope/vim-surround'
 
+" Bracket nappings
+Plug 'tpope/vim-unimpaired'
+
 " Legendary git wrapper
 Plug 'tpope/vim-fugitive'
+Plug 'sodapopcan/vim-twiggy'
+Plug 'junegunn/gv.vim'
 
-nmap <leader>gs :Gstatus<CR>
+nnoremap <leader>t :Twiggy<CR>
+
+nnoremap <leader>gs :Git<CR>
+nnoremap <leader>gb :Git blame<CR>
 
 " Quickly comment / uncomment shenenigans
 Plug 'tpope/vim-commentary'
+
+" ABOLISHMENT
+Plug 'tpope/vim-abolish'
 
 " Repeat tpope stuff
 Plug 'tpope/vim-repeat'
@@ -193,12 +219,13 @@ let g:lightline = {
 	\             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ],
     \     'right': [ [ 'lineinfo' ],
     \                [ 'percent' ],
-    \                [ 'current_fuction', 'fileformat', 'fileencoding', 'filetype' ] ]
+    \                [ 'current_function', 'zoom', 'fileformat', 'fileencoding', 'filetype' ] ]
 	\ },
     \ 'component_function': {
     \     'filename': 'LightlineFilename',
     \     'cocstauts': 'coc#status',
-    \     'current_function': 'CocGetCurrentFunction'
+    \     'current_function': 'nvim_treesitter#statusline',
+    \     'zoom': 'zoom#statusline'
     \ },
     \ 'colorscheme': 'base16'
 \ }
@@ -206,7 +233,7 @@ let g:lightline = {
 " I want quickfix / locationlist windows to use their name rather than "Location List"
 function! LightlineFilename()
     if &buftype ==# 'quickfix'
-        return w:quickfix_title
+        return get(w:, 'quickfix_title', '')
     endif
     
     let filename = expand('%:.')
@@ -219,7 +246,53 @@ Plug 'avishayy/vim-base16-lightline'
 " lightline already shows the current mode
 set noshowmode
 
+Plug 'preservim/nerdtree'
+Plug 'ryanoasis/vim-devicons'
+
+nmap <leader>T :NERDTreeToggle<CR>
+
+" jsx stuff
+Plug 'maxmellon/vim-jsx-pretty'
+
+" Startify
+Plug 'mhinz/vim-startify'
+let g:startify_change_to_dir = 0
+
+" Dockerfiel syntax highlighting
+Plug 'ekalinin/Dockerfile.vim'
+
+" Zoom windows
+Plug 'dhruvasagar/vim-zoom'
+ 
+nmap <leader>z <Plug>(zoom-toggle)
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+
+" }
+
 call plug#end()
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  indent = {
+    enable = true
+  }
+}
+EOF
 
 " must be placed after plug#end
 colorscheme base16-default-dark
@@ -258,6 +331,13 @@ let mapleader = "\\"
 nnoremap <leader>s :source $MYVIMRC<CR>
 nnoremap <leader>e :e $MYVIMRC<CR>
 
+" Scroll the viewport faster
+nnoremap <C-e> 3<C-e>3j
+nnoremap <C-y> 3<C-y>3k
+
+" Go to the last file with double space
+nnoremap <space><space> :b#<CR>
+
 " }}}
 
 " Options {{{
@@ -275,6 +355,8 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 
+autocmd Filetype html,typescript,typescriptreact setlocal ts=2 sw=2 sts=2
+
 " Search is case insensitive, can be overriden with \c or \C
 set ignorecase
 
@@ -284,9 +366,16 @@ set scrolloff=3
 " Persistent undo
 set undofile
 
+" Mouse is till nice
+set mouse=a
+
+" Show live substitution
+set inccommand=nosplit
+
 " }}}
 
 " Command line abbreviations {{{
 cnoreabbrev man Man
 cnoreabbrev vimdir ~/.config/nvim/
+cnoreabbrev So so
 " }}}
