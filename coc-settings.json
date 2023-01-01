@@ -1,4 +1,15 @@
 {
-    "clangd.semanticHighlighting": true,
-    "coc.preferences.formatOnSaveFiletypes": [ "rust" ]
+  "clangd.path": "/Users/avishay/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "python",
+    "css"
+  ],
+  "python.linting.mypyEnabled": true,
+  "python.formatting.provider": "black",
+  "python.formatting.autopep8Path": "/Users/avishay/Library/Python/3.8/bin/black"
 }
