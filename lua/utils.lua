@@ -70,4 +70,37 @@ M.reload_config = function()
   end, vim.fn.split(vim.fn.execute("scriptnames"), "\n"))
 end
 
+-- toggle quickfix/loclist on/off
+-- type='*': qf toggle and send to bottom
+-- type='l': loclist toggle (all windows)
+function M.toggle_qf(type)
+  local windows = M.find_qf(type)
+  if #windows > 0 then
+    -- hide all visible windows
+    for _, win in ipairs(windows) do
+      vim.api.nvim_win_hide(win.winid)
+    end
+  else
+    -- no windows are visible, attempt to open
+    if type == "l" then
+      M.open_loclist_all()
+    else
+      M.open_qf()
+    end
+  end
+end
+
+function M.winmove(key) 
+  local curwin = vim.fn.winnr()
+  vim.cmd("wincmd " .. key)
+  if curwin == vim.fn.winnr() then
+    if string.find('jk', key) then
+      vim.cmd("wincmd s")
+    else
+      vim.cmd("wincmd v")
+    end
+    vim.cmd("wincmd " .. key)
+  end
+end
+
 return M
