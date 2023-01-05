@@ -1,11 +1,5 @@
 {
-  "Comment.nvim": {
-    "branch": "master",
-    "commit": "ab00bcf5aa979c53f2f40dc2655c03e24f4ef50f"
-  },
-  "lazy.nvim": {
-    "branch": "main",
-    "commit": "e89e938991701cef7b9ace1913a7251c4c0fa46c"
-  }
+  "Comment.nvim": { "branch": "master", "commit": "ab00bcf5aa979c53f2f40dc2655c03e24f4ef50f" },
+  "gruvbox": { "branch": "master", "commit": "bf2885a95efdad7bd5e4794dd0213917770d79b7" },
+  "lazy.nvim": { "branch": "main", "commit": "e89e938991701cef7b9ace1913a7251c4c0fa46c" }
 }
-

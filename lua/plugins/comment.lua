@@ -1,5 +1,5 @@
 return {
     "numToStr/Comment.nvim",
-    keys = "gcc",
+    keys = "gc",
     config = true,
 }
