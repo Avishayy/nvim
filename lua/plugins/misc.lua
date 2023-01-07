@@ -11,4 +11,8 @@ return {
     event = "BufReadPost",
     config = { max_join_length = 150 },
   },
+  {
+    "tpope/vim-eunuch",
+    event = "VeryLazy",
+  },
 }
