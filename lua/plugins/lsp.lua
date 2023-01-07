@@ -1,6 +1,9 @@
 return {
   {
-    "neovim/nvim-lspconfig"
+    "neovim/nvim-lspconfig",
+    config = function()
+      require'lspconfig'.tsserver.setup {}
+    end
   },
   {
     "williamboman/mason.nvim",
