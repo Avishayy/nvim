@@ -3,6 +3,7 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       "hrsh7th/nvim-cmp",
+      "folke/neodev.nvim",
     },
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -31,6 +32,24 @@ return {
           },
         },
       }
+
+      require'lspconfig'.sumneko_lua.setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { 'vim' },
+            },
+            workspace = {
+              library = vim.api.nvim_get_runtime_file("", true),
+            },
+            completion = {
+              callSnippet = "Replace",
+            },
+          },
+        }
+      }
     end
   },
   {
@@ -49,6 +68,7 @@ return {
         ensure_installed = {
           "tsserver",
           "pyright",
+          "sumneko_lua",
         },
       }
     end
