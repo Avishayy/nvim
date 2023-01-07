@@ -79,6 +79,9 @@ return {
             enable = false,
           },
         },
+        matchup = {
+          enable = true,
+        },
       })
     end,
   },
