@@ -1,6 +1,7 @@
 local map = vim.keymap.set
 
 map("n", "<leader>l", "<cmd>Lazy<cr>")
+map("n", "<leader>gs", "<cmd>G<cr>")
 
 vim.api.nvim_create_user_command("NvimRestart",
   function()
