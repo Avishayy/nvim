@@ -13,10 +13,17 @@ vim.api.nvim_create_user_command("NvimRestart",
 map("", "<leader>R", "<Esc>:NvimRestart<CR>",
   { silent = true, desc = "reload nvim configuration" })
 
+
 vim.g.mapleader = "\\"
 
--- <CR> to save
-map("n", "<CR>", ":w<CR>", { desc = "Save" })
+-- <CR> to save in regular files (empty buftype)
+-- Everywhere else <CR> acts as usual
+map("n", "<CR>", function()
+  if vim.o.buftype == '' then
+    return ":w<CR>"
+  end
+  return "<CR>"
+end, { expr = true, desc = "Save" })
 
 -- Quickfix list mappings
 map("n", "<leader>q", "<cmd>lua require'utils'.toggle_qf('q')<CR>",
