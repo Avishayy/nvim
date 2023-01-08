@@ -51,8 +51,6 @@ M.reload_config = function()
     { "^keymaps$", fn = function() require("keymaps") end },
     { "^macros$", fn = function() require("macros") end },
     { "^utils$" },
-    { mod = "ts%-vimdoc" },
-    { mod = "smartyank", fn = function() require("smartyank") end },
   })
   -- re-source all language specific settings, scans all runtime files under
   -- '/usr/share/nvim/runtime/(indent|syntax)' and 'after/ftplugin'
