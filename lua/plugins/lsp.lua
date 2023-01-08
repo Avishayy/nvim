@@ -18,10 +18,13 @@ return {
 
         -- Format through null-ls
         local function null_ls_format()
+          -- for files that have more than 1k lines, use async save so we don't hit timeout
+          -- we use non-async save so we don't need to manually save file again after format
+          -- (but we'll have to save twice on big files)
+          -- maybe find a solution that saves twice?
+          local async = vim.fn.line('$') >= 1000 and true or false
           vim.lsp.buf.format {
-            -- async false so we don't need to manually save file again
-            -- after format.. maybe find a solution that saves twice?
-            async = false,
+            async = async,
             bufnr = bufnr,
             filter = function(filter_client)
               return filter_client.name == "null-ls"
