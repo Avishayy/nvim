@@ -1,0 +1,8 @@
+vim.keymap.set("n", "gp", "<cmd>Git push<cr>", { buffer = true })
+vim.keymap.set("n", "gP", ":Git push -f", { buffer = true })
+vim.keymap.set("n", "gl", "<cmd>Git pull<cr>", { buffer = true })
+vim.keymap.set("n", "gu", "<cmd>Git branch -u origin/main<cr>", { buffer = true })
+vim.keymap.set("n", "gU", "<cmd>Git branch -u origin/" .. vim.fn.FugitiveHead() .. "<cr>", { buffer = true })
+vim.keymap.set("n", "c", "<cmd>Git checkout -<cr>", { buffer = true })
+vim.keymap.set("n", "cm", "<cmd>Git checkout main<cr>", { buffer = true })
+vim.keymap.set("n", "grom", "<cmd>Git rebase -i origin/main<cr>", { buffer = true })
