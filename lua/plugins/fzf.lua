@@ -10,6 +10,9 @@ return {
     },
     keys = {
       { "<C-p>", "<cmd>Files<cr>" },
+      { "q:", "<cmd>History:<cr>" },
+      { "q/", "<cmd>History/<cr>" },
+      { "q?", "<cmd>History?<cr>" },
       -- <Cmd> mappings interpret keycodes (<c-r><c-w>) as plain, so we need
       -- a regular mapping here
       { "<C-f>", ":Rg <c-r><c-w><cr>" },
