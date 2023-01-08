@@ -75,6 +75,8 @@ end
 o.signcolumn="yes:1"
 
 -- Diagnostics
+-- For CursorHold of diagnostic
+o.updatetime = 250
 vim.diagnostic.config({
   virtual_text = false,
 })
