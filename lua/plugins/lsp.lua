@@ -95,4 +95,15 @@ return {
       }
     end
   },
+  {
+    "folke/trouble.nvim",
+    cmd = "Trouble",
+    keys = {
+      { "<leader>t", "<cmd>TroubleToggle<cr>" },
+    },
+    dependencies = {
+      "kyazdani42/nvim-web-devicons",
+    },
+    config = true
+  },
 }
