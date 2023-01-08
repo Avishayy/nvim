@@ -10,14 +10,24 @@ return {
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-      local on_attach = function(client, bufnr)
-        -- If the LSP supports formatting, allow for format-on-save through LSP
-        if client.server_capabilities.document_formatting then
-          vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-        end
+      local format_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
+      local on_attach = function(client, bufnr)
         -- Enable completion triggered by <c-x><c-o>
         vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+        -- Format through null-ls
+        local function null_ls_format()
+          vim.lsp.buf.format {
+            -- async false so we don't need to manually save file again
+            -- after format.. maybe find a solution that saves twice?
+            async = false,
+            bufnr = bufnr,
+            filter = function(filter_client)
+              return filter_client.name == "null-ls"
+            end,
+          }
+        end
 
         -- Mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -36,7 +46,13 @@ return {
         vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
         vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
         vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-        vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+        vim.keymap.set('n', '<space>f', function() null_ls_format() end, bufopts)
+        vim.api.nvim_clear_autocmds({ group = format_augroup, buffer = bufnr })
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          group = format_augroup,
+          buffer = bufnr,
+          callback = null_ls_format,
+        })
       end
 
       require'lspconfig'.tsserver.setup {
