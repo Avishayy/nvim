@@ -70,3 +70,19 @@ local disabled_built_ins = {
 for _, plugin in pairs(disabled_built_ins) do
   vim.g["loaded_" .. plugin] = 1
 end
+
+-- Don't jump sign column on errors
+o.signcolumn="yes:1"
+
+-- Diagnostics
+vim.diagnostic.config({
+  virtual_text = false,
+})
+local function lspSymbol(name, icon)
+  local hl = "DiagnosticSign" .. name;
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+lspSymbol("Error", "")
+lspSymbol("Hint", "")
+lspSymbol("Info", "")
+lspSymbol("Warning", "")
