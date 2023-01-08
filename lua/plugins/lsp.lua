@@ -4,6 +4,7 @@ return {
     dependencies = {
       "hrsh7th/nvim-cmp",
       "folke/neodev.nvim",
+      "b0o/SchemaStore.nvim",
     },
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -72,6 +73,17 @@ return {
           },
         }
       }
+
+      require'lspconfig'.jsonls.setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+          json = {
+            schemas = require('schemastore').json.schemas(),
+            validate = { enable = true },
+          },
+        },
+      }
     end
   },
   {
@@ -91,6 +103,7 @@ return {
           "tsserver",
           "pyright",
           "sumneko_lua",
+          "jsonls",
         },
       }
     end
