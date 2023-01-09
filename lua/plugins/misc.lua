@@ -48,4 +48,8 @@ return {
     event = "BufReadPost",
     config = true,
   },
+  {
+    "lfv89/vim-interestingwords",
+    keys = { "<leader>k", "<leader>K" },
+  },
 }
