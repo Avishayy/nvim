@@ -4,6 +4,7 @@ return {
     lazy = false,
     keys = {
       { "<leader>s", "<cmd>G<cr>" },
+      { "<leader>gb", "<cmd>G blame -w<cr>" },
     },
     cmd = "G",
   },
