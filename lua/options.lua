@@ -48,7 +48,8 @@ end
 
 -- Disable some in built plugins completely
 local disabled_built_ins = {
-  "netrw",
+  -- Needed for vim-rhubarb 
+  -- "netrw",
   "netrwPlugin",
   "netrwSettings",
   "netrwFileHandlers",
