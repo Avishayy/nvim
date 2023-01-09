@@ -11,8 +11,10 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = "BufReadPost",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+    },
     config = function()
-        -- vim.cmd [[ ]]
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
           "bash",
@@ -70,13 +72,24 @@ return {
         },
         textobjects = {
           select = {
-            enable = false,
+            enable = true,
+            lookahead = true,
+            keymaps = {
+              -- You can use the capture groups defined in textobjects.scm
+              ["af"] = "@function.outer",
+              ["if"] = "@function.inner",
+              ["ac"] = "@class.outer",
+              ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+            },
           },
-          move = {
-            enable = false,
-          },
-          lsp_interop = {
-            enable = false,
+          swap = {
+            enable = true,
+            swap_next = {
+              ["<leader>n"] = "@parameter.inner",
+            },
+            swap_previous = {
+              ["<leader>p"] = "@parameter.inner",
+            },
           },
         },
         matchup = {
