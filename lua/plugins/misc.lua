@@ -37,4 +37,10 @@ return {
     "tpope/vim-abolish",
     event = "VeryLazy",
   },
+  {
+    "dhruvasagar/vim-zoom",
+    keys = {
+      { "<leader>z", "<Plug>(zoom-toggle)" },
+    },
+  }
 }
