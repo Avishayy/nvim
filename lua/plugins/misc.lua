@@ -42,5 +42,10 @@ return {
     keys = {
       { "<leader>z", "<Plug>(zoom-toggle)" },
     },
-  }
+  },
+  {
+    "NvChad/nvim-colorizer.lua",
+    event = "BufReadPost",
+    config = true,
+  },
 }
