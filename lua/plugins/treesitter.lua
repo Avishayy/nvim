@@ -4,7 +4,6 @@ return {
     "nvim-treesitter/nvim-treesitter-context",
     event = "BufReadPre",
     config = function()
-      vim.cmd [[ hi TreesitterContext guibg=#171717 ]]
       require("treesitter-context").setup()
     end
   },
@@ -52,6 +51,7 @@ return {
         sync_install = true,
         auto_install = false,
         highlight = { enable = true },
+        additional_vim_regex_highlighting = false,
         indent = { enable = false },
         context_commentstring = { enable = true, enable_autocmd = false },
         incremental_selection = {

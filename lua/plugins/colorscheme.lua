@@ -1,14 +1,19 @@
 return {
-    "morhetz/gruvbox",
+  {
+    "ellisonleao/gruvbox.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-        vim.g.gruvbox_contrast_dark = "hard"
-        -- Will set sign column to look like the line number
-        vim.g.gruvbox_sign_column = "bg0"
-        vim.cmd [[ colorscheme gruvbox ]]
-
-        -- Remove ugly background color from nvim_open_win() 
-        vim.cmd [[ highlight NormalFloat guifg=0 ]]
+      require("gruvbox").setup {
+        contrast = "hard",
+        overrides = {
+          -- Darker background for floating windows
+          NormalFloat = { bg = "#282828" },
+          -- Sign column to look like regular background
+          SignColumn = { bg = "#1d2021" },
+        }
+      }
+      vim.cmd [[ colorscheme gruvbox ]]
     end,
+  },
 }
