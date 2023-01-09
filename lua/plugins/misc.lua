@@ -33,4 +33,8 @@ return {
       }
     end
   },
+  {
+    "tpope/vim-abolish",
+    event = "VeryLazy",
+  },
 }
