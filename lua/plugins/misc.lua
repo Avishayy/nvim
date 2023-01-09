@@ -15,4 +15,13 @@ return {
     "tpope/vim-eunuch",
     event = "VeryLazy",
   },
+  {
+    "kylechui/nvim-surround",
+    keys = {
+      "ys",
+      "ds",
+      "cs",
+    },
+    config = true,
+  },
 }
