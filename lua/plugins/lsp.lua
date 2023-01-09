@@ -5,6 +5,7 @@ return {
       "hrsh7th/nvim-cmp",
       "folke/neodev.nvim",
       "b0o/SchemaStore.nvim",
+      "lvimuser/lsp-inlayhints.nvim",
     },
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -15,6 +16,9 @@ return {
       local on_attach = function(client, bufnr)
         -- Enable completion triggered by <c-x><c-o>
         vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+        -- Enable inlay hints
+        require("lsp-inlayhints").on_attach(client, bufnr)
 
         -- Format through null-ls
         local function null_ls_format()
@@ -64,6 +68,28 @@ return {
         settings = {
           completions = {
             completeFunctionCalls = true
+          },
+          typescript = {
+            inlayHints = {
+              includeInlayParameterNameHints = 'all',
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
+            }
+          },
+          javascript = {
+            inlayHints = {
+              includeInlayParameterNameHints = 'all',
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
+            }
           }
         },
         init_options = {
@@ -152,5 +178,15 @@ return {
       "kyazdani42/nvim-web-devicons",
     },
     config = true
+  },
+  {
+    "lvimuser/lsp-inlayhints.nvim",
+    config = function ()
+      require("lsp-inlayhints").setup {
+        inlay_hints = {
+          only_current_line = true,
+        },
+      }
+    end,
   },
 }
