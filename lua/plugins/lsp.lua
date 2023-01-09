@@ -106,9 +106,6 @@ return {
         on_attach = on_attach,
         settings = {
           Lua = {
-            diagnostics = {
-              globals = { 'vim' },
-            },
             workspace = {
               library = vim.api.nvim_get_runtime_file("", true),
               checkThirdParty = false,
@@ -152,7 +149,7 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    event = "VeryLazy",
+    event = "BufReadPost",
     dependencies = {
       "neovim/nvim-lspconfig",
       "williamboman/mason.nvim"
@@ -188,5 +185,9 @@ return {
         },
       }
     end,
+  },
+  {
+    "folke/neodev.nvim",
+    config = true,
   },
 }
