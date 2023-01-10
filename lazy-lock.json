@@ -15,6 +15,7 @@
   "gruvbox.nvim": { "branch": "main", "commit": "e863942494d7c72a7c8d2c54cf651f28fc5a76ab" },
   "lazy.nvim": { "branch": "main", "commit": "4304035ef4eae2d9dfac4fc082a1b391e6cd928e" },
   "lsp-inlayhints.nvim": { "branch": "main", "commit": "a28c51a6362e3faa17f67749436cb5c8b55dcc6d" },
+  "lualine.nvim": { "branch": "master", "commit": "d8c392dd75778d6258da4e7c55522e94ac389732" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "3751eb5c56c67b51e68a1f4a0da28ae74ab771c1" },
   "mason.nvim": { "branch": "main", "commit": "a4ebe1f14ba31242cd09f9e0709d5b1f9d2bcecb" },
   "neodev.nvim": { "branch": "main", "commit": "258b83f48405c6b530c09dd96950693664dc6bc0" },
