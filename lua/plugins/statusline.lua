@@ -9,7 +9,12 @@ return {
       require("lualine").setup {
         options = {
           theme = 'gruvbox',
-        }
+        },
+        extensions = {
+          'fugitive',
+          'fzf',
+          'quickfix',
+        },
       }
     end
   },
