@@ -39,7 +39,15 @@ return {
         { name = "nvim_lua" },
         { name = "luasnip" },
         { name = "path" },
-        { name = "buffer" },
+        {
+          name = "buffer",
+          option = {
+            keyword_pattern = [[\k\+]],
+            get_bufnrs = function()
+              return vim.api.nvim_list_bufs()
+            end
+          },
+        },
       },
 
       -- we use 'comleteopt=...,noselect' but we still want cmp to autoselect
