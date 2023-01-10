@@ -21,6 +21,9 @@ return {
       { "<leader>d", ":DiffviewOpen " },
       { "<leader>D", "<cmd>DiffviewClose<cr>" },
     },
-    cmd = "DiffviewOpen",
+    cmd = {
+      "DiffviewOpen",
+      "DiffviewFileHistory",
+    },
   },
 }
