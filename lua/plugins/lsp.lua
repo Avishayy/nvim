@@ -6,6 +6,7 @@ return {
       "folke/neodev.nvim",
       "b0o/SchemaStore.nvim",
       "lvimuser/lsp-inlayhints.nvim",
+      "simrat39/rust-tools.nvim",
     },
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -135,6 +136,13 @@ return {
         capabilities = capabilities,
         on_attach = on_attach,
       }
+
+      require('rust-tools').setup({
+        server = {
+          on_attach = on_attach,
+        },
+      })
+
     end
   },
   {
@@ -161,6 +169,7 @@ return {
           "pyright",
           "sumneko_lua",
           "jsonls",
+          "rust-analyzer",
         },
       }
     end
