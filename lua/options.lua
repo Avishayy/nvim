@@ -16,6 +16,8 @@ o.splitright = true
 o.termguicolors = true
 o.timeoutlen = 250
 o.undofile = true
+o.swapfile = false
+o.backup = false
 o.wrap = false
 o.formatoptions = o.formatoptions - 'o'
 
@@ -34,11 +36,6 @@ o.expandtab = true
 o.shiftwidth = 4
 o.softtabstop = 4
 o.tabstop = 4
-
--- Swap directory
-vim.g.swap_dir = vim.fn.stdpath("data") .. "/swap"
-vim.fn.mkdir(vim.g.swap_dir, "p")
-vim.o.directory = vim.g.swap_dir .. ',.'
 
 -- Prefer ripgrep to grep.
 if (1 == vim.fn.executable("rg")) then
