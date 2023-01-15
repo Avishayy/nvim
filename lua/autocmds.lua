@@ -12,3 +12,10 @@ vim.api.nvim_create_autocmd("CursorHold", {
     vim.diagnostic.open_float(nil, opts)
   end
 })
+
+local indentation_augroup = vim.api.nvim_create_augroup("Indentation", {})
+vim.api.nvim_create_autocmd("FileType", {
+  group = indentation_augroup,
+  pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
+  command = "setlocal shiftwidth=2 tabstop=2"
+})
