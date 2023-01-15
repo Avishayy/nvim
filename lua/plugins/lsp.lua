@@ -170,7 +170,7 @@ return {
           "pyright",
           "sumneko_lua",
           "jsonls",
-          "rust-analyzer",
+          "rust_analyzer",
         },
       }
     end
