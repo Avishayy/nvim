@@ -8,6 +8,7 @@ return {
       "lvimuser/lsp-inlayhints.nvim",
       "simrat39/rust-tools.nvim",
       "j-hui/fidget.nvim",
+      "gfanto/fzf-lsp.nvim",
     },
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -41,6 +42,8 @@ return {
         -- Mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         local bufopts = { noremap=true, silent=true, buffer=bufnr }
+        local nsilent_bufopts = { noremap=true, buffer=bufnr }
+
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -51,6 +54,8 @@ return {
         vim.keymap.set('n', '<space>wl', function()
           print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, bufopts)
+        vim.keymap.set('n', '<space>s', ":WorkspaceSymbols ", nsilent_bufopts)
+        vim.keymap.set('n', '<space>d', "<cmd>DocumentSymbols<CR>", bufopts)
         vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
         vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
         vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
@@ -203,5 +208,12 @@ return {
   {
     "j-hui/fidget.nvim",
     config = true,
+  },
+  {
+    "gfanto/fzf-lsp.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "junegunn/fzf",
+    },
   },
 }
