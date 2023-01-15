@@ -1,5 +1,4 @@
-Hey, I decided to finally track my neovim configuration to be consistent across differnet devices (or after re-installing the OS.. Looking at you Ubuntu!)
+This is my nvim configuration files, used nvim version is at nvim.version, trying to mazimize lua usage!
 
-
-Requirements:
-1. Need to install vim-plug (https://github.com/junegunn/vim-plug)
+README wip
+Install script (font, bob, other stuff that aren't in neovim dir) wip
