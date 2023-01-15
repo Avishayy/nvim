@@ -7,6 +7,7 @@ return {
       "b0o/SchemaStore.nvim",
       "lvimuser/lsp-inlayhints.nvim",
       "simrat39/rust-tools.nvim",
+      "j-hui/fidget.nvim",
     },
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -197,6 +198,10 @@ return {
   },
   {
     "folke/neodev.nvim",
+    config = true,
+  },
+  {
+    "j-hui/fidget.nvim",
     config = true,
   },
 }
