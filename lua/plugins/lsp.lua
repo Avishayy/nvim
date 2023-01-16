@@ -67,6 +67,11 @@ return {
           buffer = bufnr,
           callback = null_ls_format,
         })
+
+        vim.lsp.semantic_tokens.start(
+          bufnr,
+          client.id
+        )
       end
 
       require'lspconfig'.tsserver.setup {
