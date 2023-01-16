@@ -72,6 +72,7 @@ return {
           bufnr,
           client.id
         )
+        vim.cmd [[ highlight link @interface @type ]]
       end
 
       require'lspconfig'.tsserver.setup {
