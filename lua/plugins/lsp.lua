@@ -68,11 +68,13 @@ return {
           callback = null_ls_format,
         })
 
-        vim.lsp.semantic_tokens.start(
+        if client.server_capabilities.semanticTokensProvider then
+          vim.lsp.semantic_tokens.start(
           bufnr,
           client.id
-        )
-        vim.cmd [[ highlight link @interface @type ]]
+          )
+          vim.cmd [[ highlight link @interface @type ]]
+        end
       end
 
       require'lspconfig'.tsserver.setup {
@@ -145,6 +147,11 @@ return {
       }
 
       require'lspconfig'.pyright.setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
+
+      require'lspconfig'.sourcekit.setup {
         capabilities = capabilities,
         on_attach = on_attach,
       }
