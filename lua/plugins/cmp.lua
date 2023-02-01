@@ -9,11 +9,19 @@ return {
     "hrsh7th/cmp-nvim-lua",
     "saadparwaiz1/cmp_luasnip",
     "L3MON4D3/LuaSnip",
+    "onsails/lspkind.nvim",
   },
 
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
+    local lspkind = require("lspkind")
+
+    local has_words_before = function()
+      if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+      return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+    end
 
     cmp.setup {
       snippet = {
@@ -87,30 +95,18 @@ return {
       },
 
       formatting = {
-        deprecated = false,
-        fields = { "kind", "abbr", "menu" },
-        format = function(entry, vim_item)
-          local source_names = {
-            path = "Path",
-            buffer = "Buffer",
-            cmdline = "Cmdline",
-            luasnip = "LuaSnip",
-            nvim_lua = "Lua",
-            nvim_lsp = "LSP",
-          }
+        format = lspkind.cmp_format({
+          mode = 'symbol', -- show only symbol annotations
+          maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+          ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 
-          vim_item.menu = ("%-10s [%s]"):format(
-            vim_item.kind,
-            source_names[entry.source.name] or entry.source.name)
-
-          -- get the item kind icon from our LSP settings
-          local kind_idx = vim.lsp.protocol.CompletionItemKind[vim_item.kind]
-          if tonumber(kind_idx) > 0 then
-            vim_item.kind = vim.lsp.protocol.CompletionItemKind[kind_idx]
-          end
-
-          return vim_item
-        end,
+          -- The function below will be called before any actual modifications from lspkind
+          -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+          -- before = function (entry, vim_item)
+          --   ...
+          --   return vim_item
+          -- end
+        })
       },
 
       -- DO NOT ENABLE
