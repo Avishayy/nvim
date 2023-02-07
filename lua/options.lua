@@ -5,7 +5,6 @@ o.cmdheight = 1
 o.completeopt = "menuone,noselect"
 o.confirm = true
 o.cursorline = false
-o.equalalways = false
 o.fileformats = "unix,dos"
 o.hidden = true
 o.laststatus = 3
