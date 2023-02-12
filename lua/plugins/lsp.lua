@@ -9,6 +9,7 @@ return {
       "simrat39/rust-tools.nvim",
       "j-hui/fidget.nvim",
       "gfanto/fzf-lsp.nvim",
+      "jose-elias-alvarez/typescript.nvim",
     },
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -77,41 +78,43 @@ return {
         end
       end
 
-      require'lspconfig'.tsserver.setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = {
-          completions = {
-            completeFunctionCalls = true
-          },
-          typescript = {
-            inlayHints = {
-              includeInlayParameterNameHints = 'all',
-              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = true,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayEnumMemberValueHints = true,
+      require("typescript").setup {
+        server = {
+          capabilities = capabilities,
+          on_attach = on_attach,
+          settings = {
+            completions = {
+              completeFunctionCalls = true
+            },
+            typescript = {
+              inlayHints = {
+                includeInlayParameterNameHints = 'all',
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+              }
+            },
+            javascript = {
+              inlayHints = {
+                includeInlayParameterNameHints = 'all',
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+              }
             }
           },
-          javascript = {
-            inlayHints = {
-              includeInlayParameterNameHints = 'all',
-              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = true,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayEnumMemberValueHints = true,
-            }
-          }
-        },
-        init_options = {
-          hostInfo = "neovim",
-          preferences = {
-            includeCompletionsWithSnippetText = true,
-            includeCompletionsForImportStatements = true,
+          init_options = {
+            hostInfo = "neovim",
+            preferences = {
+              includeCompletionsWithSnippetText = true,
+              includeCompletionsForImportStatements = true,
+            },
           },
         },
       }
