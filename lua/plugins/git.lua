@@ -26,4 +26,14 @@ return {
       "DiffviewFileHistory",
     },
   },
+  {
+    "stsewd/fzf-checkout.vim",
+    cmd = {
+      "GBranches",
+      "GTags",
+    },
+    config = function()
+      vim.g.fzf_checkout_git_options = '--sort=-committerdate'
+    end
+  },
 }
