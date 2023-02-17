@@ -34,5 +34,4 @@ lazy.setup("plugins", {
     --      ["<localleader>t"] = false,
     --    },
   },
-  debug = false,
 })
