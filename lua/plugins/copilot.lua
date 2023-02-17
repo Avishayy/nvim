@@ -3,7 +3,7 @@ return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     config = function()
-      require("copilot").setup({
+      require("copilot").setup {
         panel = {
           auto_refresh = false,
           keymap = {
@@ -23,7 +23,7 @@ return {
             dismiss = "<C-]>",
           },
         },
-      })
+      }
     end,
   },
 }

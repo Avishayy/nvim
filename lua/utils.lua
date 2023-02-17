@@ -45,18 +45,38 @@ M.unload_modules = function(patterns)
 end
 
 M.reload_config = function()
-  M.unload_modules({
-    { "^options$", fn = function() require("options") end },
-    { "^abbrevs$", fn = function() require("abbrevs") end },
-    { "^keymaps$", fn = function() require("keymaps") end },
-    { "^macros$", fn = function() require("macros") end },
+  M.unload_modules {
+    {
+      "^options$",
+      fn = function()
+        require("options")
+      end,
+    },
+    {
+      "^abbrevs$",
+      fn = function()
+        require("abbrevs")
+      end,
+    },
+    {
+      "^keymaps$",
+      fn = function()
+        require("keymaps")
+      end,
+    },
+    {
+      "^macros$",
+      fn = function()
+        require("macros")
+      end,
+    },
     { "^utils$" },
-  })
+  }
   -- re-source all language specific settings, scans all runtime files under
   -- '/usr/share/nvim/runtime/(indent|syntax)' and 'after/ftplugin'
   local ft = vim.bo.filetype
   vim.tbl_filter(function(s)
-    for _, e in ipairs({ "vim", "lua" }) do
+    for _, e in ipairs { "vim", "lua" } do
       if ft and #ft > 0 and s:match(("/%s.%s"):format(ft, e)) then
         local file = vim.fn.expand(s:match("[^: ]*$"))
         vim.cmd("source " .. file)
@@ -92,7 +112,9 @@ end
 -- open quickfix if not empty
 function M.open_qf()
   local qf_name = "quickfix"
-  local qf_empty = function() return vim.tbl_isempty(vim.fn.getqflist()) end
+  local qf_empty = function()
+    return vim.tbl_isempty(vim.fn.getqflist())
+  end
   if not qf_empty() then
     vim.cmd("copen")
     vim.cmd("wincmd J")
@@ -106,7 +128,9 @@ end
 function M.open_loclist_all()
   local wininfo = vim.fn.getwininfo()
   local qf_name = "loclist"
-  local qf_empty = function(winnr) return vim.tbl_isempty(vim.fn.getloclist(winnr)) end
+  local qf_empty = function(winnr)
+    return vim.tbl_isempty(vim.fn.getloclist(winnr))
+  end
   for _, win in pairs(wininfo) do
     if win["quickfix"] == 0 then
       if not qf_empty(win["winnr"]) then
@@ -140,11 +164,11 @@ function M.toggle_qf(type)
   end
 end
 
-function M.winmove(key) 
+function M.winmove(key)
   local curwin = vim.fn.winnr()
   vim.cmd("wincmd " .. key)
   if curwin == vim.fn.winnr() then
-    if string.find('jk', key) then
+    if string.find("jk", key) then
       vim.cmd("wincmd s")
     else
       vim.cmd("wincmd v")

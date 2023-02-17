@@ -11,14 +11,14 @@ return {
       "jose-elias-alvarez/typescript.nvim",
     },
     config = function()
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
 
       local format_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
       local on_attach = function(client, bufnr)
         -- Enable completion triggered by <c-x><c-o>
-        vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+        vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
         -- Enable inlay hints
         require("lsp-inlayhints").on_attach(client, bufnr)
@@ -29,7 +29,7 @@ return {
           -- we use non-async save so we don't need to manually save file again after format
           -- (but we'll have to save twice on big files)
           -- maybe find a solution that saves twice?
-          local async = vim.fn.line('$') >= 1000 and true or false
+          local async = vim.fn.line("$") >= 1000 and true or false
           vim.lsp.buf.format {
             async = async,
             bufnr = bufnr,
@@ -41,28 +41,30 @@ return {
 
         -- Mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
-        local bufopts = { noremap=true, silent=true, buffer=bufnr }
-        local nsilent_bufopts = { noremap=true, buffer=bufnr }
+        local bufopts = { noremap = true, silent = true, buffer = bufnr }
+        local nsilent_bufopts = { noremap = true, buffer = bufnr }
 
-        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-        vim.keymap.set('n', 'gh', vim.lsp.buf.signature_help, bufopts)
-        vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-        vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-        vim.keymap.set('n', '<space>wl', function()
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+        vim.keymap.set("n", "gh", vim.lsp.buf.signature_help, bufopts)
+        vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
+        vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+        vim.keymap.set("n", "<space>wl", function()
           print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, bufopts)
-        vim.keymap.set('n', '<space>s', ":WorkspaceSymbols ", nsilent_bufopts)
-        vim.keymap.set('n', '<space>d', "<cmd>DocumentSymbols<CR>", bufopts)
-        vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+        vim.keymap.set("n", "<space>s", ":WorkspaceSymbols ", nsilent_bufopts)
+        vim.keymap.set("n", "<space>d", "<cmd>DocumentSymbols<CR>", bufopts)
+        vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
         -- Uses IncRename instead
         -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-        vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-        vim.keymap.set('n', '<space>f', function() null_ls_format() end, bufopts)
-        vim.api.nvim_clear_autocmds({ group = format_augroup, buffer = bufnr })
+        vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+        vim.keymap.set("n", "<space>f", function()
+          null_ls_format()
+        end, bufopts)
+        vim.api.nvim_clear_autocmds { group = format_augroup, buffer = bufnr }
         vim.api.nvim_create_autocmd("BufWritePre", {
           group = format_augroup,
           buffer = bufnr,
@@ -70,11 +72,8 @@ return {
         })
 
         if client.server_capabilities.semanticTokensProvider then
-          vim.lsp.semantic_tokens.start(
-          bufnr,
-          client.id
-          )
-          vim.cmd [[ highlight link @interface @type ]]
+          vim.lsp.semantic_tokens.start(bufnr, client.id)
+          vim.cmd([[ highlight link @interface @type ]])
         end
       end
 
@@ -84,30 +83,30 @@ return {
           on_attach = on_attach,
           settings = {
             completions = {
-              completeFunctionCalls = true
+              completeFunctionCalls = true,
             },
             typescript = {
               inlayHints = {
-                includeInlayParameterNameHints = 'all',
+                includeInlayParameterNameHints = "all",
                 includeInlayParameterNameHintsWhenArgumentMatchesName = false,
                 includeInlayFunctionParameterTypeHints = true,
                 includeInlayVariableTypeHints = true,
                 includeInlayPropertyDeclarationTypeHints = true,
                 includeInlayFunctionLikeReturnTypeHints = true,
                 includeInlayEnumMemberValueHints = true,
-              }
+              },
             },
             javascript = {
               inlayHints = {
-                includeInlayParameterNameHints = 'all',
+                includeInlayParameterNameHints = "all",
                 includeInlayParameterNameHintsWhenArgumentMatchesName = false,
                 includeInlayFunctionParameterTypeHints = true,
                 includeInlayVariableTypeHints = true,
                 includeInlayPropertyDeclarationTypeHints = true,
                 includeInlayFunctionLikeReturnTypeHints = true,
                 includeInlayEnumMemberValueHints = true,
-              }
-            }
+              },
+            },
           },
           init_options = {
             hostInfo = "neovim",
@@ -119,7 +118,7 @@ return {
         },
       }
 
-      require'lspconfig'.sumneko_lua.setup {
+      require("lspconfig").sumneko_lua.setup {
         capabilities = capabilities,
         on_attach = on_attach,
         settings = {
@@ -135,46 +134,45 @@ return {
               enable = false,
             },
           },
-        }
+        },
       }
 
-      require'lspconfig'.jsonls.setup {
+      require("lspconfig").jsonls.setup {
         capabilities = capabilities,
         on_attach = on_attach,
         settings = {
           json = {
-            schemas = require('schemastore').json.schemas(),
+            schemas = require("schemastore").json.schemas(),
             validate = { enable = true },
           },
         },
       }
 
-      require'lspconfig'.pyright.setup {
+      require("lspconfig").pyright.setup {
         capabilities = capabilities,
         on_attach = on_attach,
       }
 
-      require'lspconfig'.sourcekit.setup {
+      require("lspconfig").sourcekit.setup {
         capabilities = capabilities,
         on_attach = on_attach,
       }
 
-      require('rust-tools').setup({
+      require("rust-tools").setup {
         server = {
           on_attach = on_attach,
         },
-      })
-
-    end
+      }
+    end,
   },
   {
     "williamboman/mason.nvim",
     config = function()
-     require('mason').setup {
-       ui = {
-         border = "rounded",
-       }
-     }
+      require("mason").setup {
+        ui = {
+          border = "rounded",
+        },
+      }
     end,
   },
   {
@@ -182,7 +180,7 @@ return {
     event = "BufReadPost",
     dependencies = {
       "neovim/nvim-lspconfig",
-      "williamboman/mason.nvim"
+      "williamboman/mason.nvim",
     },
     config = function()
       require("mason-lspconfig").setup {
@@ -194,7 +192,7 @@ return {
           "rust_analyzer",
         },
       }
-    end
+    end,
   },
   {
     "folke/trouble.nvim",
@@ -205,11 +203,11 @@ return {
     dependencies = {
       "kyazdani42/nvim-web-devicons",
     },
-    config = true
+    config = true,
   },
   {
     "lvimuser/lsp-inlayhints.nvim",
-    config = function ()
+    config = function()
       require("lsp-inlayhints").setup {
         inlay_hints = {
           only_current_line = true,

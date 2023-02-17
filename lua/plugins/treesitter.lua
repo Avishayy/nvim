@@ -5,7 +5,7 @@ return {
     event = "BufReadPre",
     config = function()
       require("treesitter-context").setup()
-    end
+    end,
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -15,7 +15,7 @@ return {
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
     config = function()
-      require("nvim-treesitter.configs").setup({
+      require("nvim-treesitter.configs").setup {
         ensure_installed = {
           "bash",
           "c",
@@ -95,7 +95,7 @@ return {
         matchup = {
           enable = true,
         },
-      })
+      }
     end,
   },
 }

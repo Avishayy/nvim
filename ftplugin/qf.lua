@@ -1,7 +1,7 @@
 local function map_cr()
   -- Close after seelction in :Man pages
   if vim.w.quickfix_title == "Man TOC" then
-      return "<cr>:lclo<cr>"
+    return "<cr>:lclo<cr>"
   end
   return "<cr>"
 end

@@ -33,7 +33,7 @@ return {
       "GTags",
     },
     config = function()
-      vim.g.fzf_checkout_git_options = '--sort=-committerdate'
-    end
+      vim.g.fzf_checkout_git_options = "--sort=-committerdate"
+    end,
   },
 }

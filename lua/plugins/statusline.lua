@@ -5,25 +5,25 @@ return {
     dependencies = {
       "kyazdani42/nvim-web-devicons",
     },
-    config = function ()
+    config = function()
       require("lualine").setup {
         sections = {
           lualine_c = {
             {
-              'filename',
+              "filename",
               path = 1, -- Relative path
-            }
+            },
           },
         },
         options = {
-          theme = 'gruvbox',
+          theme = "gruvbox",
         },
         extensions = {
-          'fugitive',
-          'fzf',
-          'quickfix',
+          "fugitive",
+          "fzf",
+          "quickfix",
         },
       }
-    end
+    end,
   },
 }

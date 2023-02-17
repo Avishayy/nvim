@@ -25,13 +25,13 @@ return {
     config = true,
   },
   {
-    'rmagatti/auto-session',
+    "rmagatti/auto-session",
     lazy = false,
     config = function()
-      require('auto-session').setup {
-        log_level = 'error',
+      require("auto-session").setup {
+        log_level = "error",
       }
-    end
+    end,
   },
   {
     "tpope/vim-abolish",

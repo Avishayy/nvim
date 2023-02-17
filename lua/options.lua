@@ -18,7 +18,7 @@ o.undofile = true
 o.swapfile = false
 o.backup = false
 o.wrap = false
-o.formatoptions = o.formatoptions - 'o'
+o.formatoptions = o.formatoptions - "o"
 
 -- Side numbers
 o.number = true
@@ -37,14 +37,14 @@ o.softtabstop = 4
 o.tabstop = 4
 
 -- Prefer ripgrep to grep.
-if (1 == vim.fn.executable("rg")) then
-    o.grepprg="rg --vimgrep"
-    o.grepformat:prepend{"%f:%l:%c:%m"}
+if 1 == vim.fn.executable("rg") then
+  o.grepprg = "rg --vimgrep"
+  o.grepformat:prepend { "%f:%l:%c:%m" }
 end
 
 -- Disable some in built plugins completely
 local disabled_built_ins = {
-  -- Needed for vim-rhubarb 
+  -- Needed for vim-rhubarb
   -- "netrw",
   "netrwPlugin",
   "netrwSettings",
@@ -69,16 +69,16 @@ for _, plugin in pairs(disabled_built_ins) do
 end
 
 -- Don't jump sign column on errors
-o.signcolumn="yes:1"
+o.signcolumn = "yes:1"
 
 -- Diagnostics
 -- For CursorHold of diagnostic
 o.updatetime = 250
-vim.diagnostic.config({
+vim.diagnostic.config {
   virtual_text = false,
-})
+}
 local function lspSymbol(name, icon)
-  local hl = "DiagnosticSign" .. name;
+  local hl = "DiagnosticSign" .. name
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 lspSymbol("Error", "")

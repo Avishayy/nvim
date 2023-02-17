@@ -12,14 +12,14 @@ return {
     config = function()
       require("dap-python").setup("python3")
 
-      require("mason-nvim-dap").setup({
+      require("mason-nvim-dap").setup {
         ensure_installed = {
           "python",
-        }
-      })
+        },
+      }
 
       -- TODO: add autocmd that loads it every time we modify it?
-      require('dap.ext.vscode').load_launchjs()
+      require("dap.ext.vscode").load_launchjs()
     end,
   },
   {
@@ -37,7 +37,7 @@ return {
       "mfussenegger/nvim-dap",
     },
     config = function()
-      require('dap.ext.vscode').json_decode = require'json5'.parse
-    end
+      require("dap.ext.vscode").json_decode = require("json5").parse
+    end,
   },
 }

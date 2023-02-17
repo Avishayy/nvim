@@ -6,7 +6,7 @@ return {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
     },
-    config = function ()
+    config = function()
       require("noice").setup {
         lsp = {
           -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -20,6 +20,6 @@ return {
           inc_rename = true,
         },
       }
-    end
-  }
+    end,
+  },
 }
