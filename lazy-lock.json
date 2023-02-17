@@ -16,6 +16,7 @@
   "fzf-lsp.nvim": { "branch": "main", "commit": "f8988d7d738a0e9e7aba2f0a9512df6356bbda07" },
   "fzf.vim": { "branch": "master", "commit": "9c37e6801b432a4046511b14414f488487b61973" },
   "gruvbox.nvim": { "branch": "main", "commit": "e863942494d7c72a7c8d2c54cf651f28fc5a76ab" },
+  "inc-rename.nvim": { "branch": "main", "commit": "21c23c379342a731a0c90f226601ec0434627b26" },
   "lazy.nvim": { "branch": "main", "commit": "666ed7bf73eb5895253c1155bd29270b066cbdac" },
   "lsp-inlayhints.nvim": { "branch": "main", "commit": "a28c51a6362e3faa17f67749436cb5c8b55dcc6d" },
   "lspkind.nvim": { "branch": "master", "commit": "c68b3a003483cf382428a43035079f78474cd11e" },

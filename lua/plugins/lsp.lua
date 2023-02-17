@@ -57,7 +57,8 @@ return {
         vim.keymap.set('n', '<space>s', ":WorkspaceSymbols ", nsilent_bufopts)
         vim.keymap.set('n', '<space>d', "<cmd>DocumentSymbols<CR>", bufopts)
         vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-        vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+        -- Uses IncRename instead
+        -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
         vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
         vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
         vim.keymap.set('n', '<space>f', function() null_ls_format() end, bufopts)
@@ -226,5 +227,15 @@ return {
       "nvim-lua/plenary.nvim",
       "junegunn/fzf",
     },
+  },
+  {
+    "smjonas/inc-rename.nvim",
+    cmd = {
+      "IncRename",
+    },
+    keys = {
+      { "<space>rn", ":IncRename " },
+    },
+    config = true,
   },
 }
