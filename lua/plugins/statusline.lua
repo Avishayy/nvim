@@ -16,7 +16,7 @@ return {
           },
         },
         options = {
-          theme = "gruvbox",
+          theme = "catppuccin",
         },
         extensions = {
           "fugitive",

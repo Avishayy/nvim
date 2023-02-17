@@ -24,7 +24,7 @@ lazy.setup("plugins", {
   defaults = { lazy = true },
   install = {
     missing = true,
-    colorscheme = { "nightfly", "lua-embark" },
+    colorscheme = { "catppuccin" },
   },
   checker = { enabled = false },
   ui = {
