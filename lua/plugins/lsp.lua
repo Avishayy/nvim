@@ -7,7 +7,6 @@ return {
       "b0o/SchemaStore.nvim",
       "lvimuser/lsp-inlayhints.nvim",
       "simrat39/rust-tools.nvim",
-      "j-hui/fidget.nvim",
       "gfanto/fzf-lsp.nvim",
       "jose-elias-alvarez/typescript.nvim",
     },
@@ -219,10 +218,6 @@ return {
   },
   {
     "folke/neodev.nvim",
-    config = true,
-  },
-  {
-    "j-hui/fidget.nvim",
     config = true,
   },
   {
