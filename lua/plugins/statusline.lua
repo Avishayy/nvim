@@ -4,6 +4,7 @@ return {
     lazy = false,
     dependencies = {
       "kyazdani42/nvim-web-devicons",
+      "folke/noice.nvim",
     },
     config = function()
       require("lualine").setup {
@@ -12,6 +13,11 @@ return {
             {
               "filename",
               path = 1, -- Relative path
+            },
+            {
+              require("noice").api.statusline.mode.get,
+              cond = require("noice").api.statusline.mode.has,
+              color = { fg = "#ff9e64" },
             },
           },
         },
