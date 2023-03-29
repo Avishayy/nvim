@@ -21,7 +21,7 @@ return {
         },
         routes = {
           {
-            filter = { filter = { event = "msg_show", kind = "search_count" } },
+            filter = { event = "msg_show", kind = "search_count" },
             opts = { skip = true },
           },
           {
