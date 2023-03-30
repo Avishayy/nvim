@@ -44,6 +44,7 @@ return {
           "query",
           "regex",
           "rust",
+          "swift",
           "sql",
           "toml",
           "tsx",
