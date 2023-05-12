@@ -14,30 +14,12 @@ return {
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-      local format_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
       local on_attach = function(client, bufnr)
         -- Enable completion triggered by <c-x><c-o>
         vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
         -- Enable inlay hints
         require("lsp-inlayhints").on_attach(client, bufnr)
-
-        -- Format through null-ls
-        local function null_ls_format()
-          -- for files that have more than 1k lines, use async save so we don't hit timeout
-          -- we use non-async save so we don't need to manually save file again after format
-          -- (but we'll have to save twice on big files)
-          -- maybe find a solution that saves twice?
-          local async = vim.fn.line("$") >= 1000 and true or false
-          vim.lsp.buf.format {
-            async = async,
-            bufnr = bufnr,
-            filter = function(filter_client)
-              return filter_client.name == "null-ls"
-            end,
-          }
-        end
 
         -- Mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -61,15 +43,6 @@ return {
         -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
         vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
         vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-        vim.keymap.set("n", "<space>f", function()
-          null_ls_format()
-        end, bufopts)
-        vim.api.nvim_clear_autocmds { group = format_augroup, buffer = bufnr }
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          group = format_augroup,
-          buffer = bufnr,
-          callback = null_ls_format,
-        })
 
         if client.server_capabilities.semanticTokensProvider then
           vim.lsp.semantic_tokens.start(bufnr, client.id)
