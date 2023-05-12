@@ -9,7 +9,7 @@ return {
   {
     "Wansmer/treesj",
     event = "BufReadPost",
-    config = { max_join_length = 150 },
+    opts = { max_join_length = 150 },
   },
   {
     "tpope/vim-eunuch",

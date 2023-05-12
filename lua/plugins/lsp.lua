@@ -118,6 +118,10 @@ return {
         },
       }
 
+      require("neodev").setup {
+        -- add any options here, or leave empty to use the default settings
+      }
+
       require("lspconfig").lua_ls.setup {
         capabilities = capabilities,
         on_attach = on_attach,
@@ -214,10 +218,6 @@ return {
         },
       }
     end,
-  },
-  {
-    "folke/neodev.nvim",
-    config = true,
   },
   {
     "gfanto/fzf-lsp.nvim",
