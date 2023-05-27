@@ -52,4 +52,22 @@ return {
     "lfv89/vim-interestingwords",
     keys = { "<leader>k", "<leader>K" },
   },
+  {
+    "mcookly/rosetta.nvim",
+    lazy = false,
+    config = function()
+      require("rosetta").setup {
+        lang = {
+          hebrew = { -- Keyboard commands are created for each language automatically if `user_commands` are enabled.
+            keymap = "hebrew_utf-8",
+            rtl = true,
+            unicode_range = { "0590-05FF" },
+            options = { -- `vim.o` options can be passed through here.
+              delcombine = true,
+            }
+          }
+        }
+      }
+    end,
+  },
 }
