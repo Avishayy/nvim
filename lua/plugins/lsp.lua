@@ -140,6 +140,13 @@ return {
           on_attach = on_attach,
         },
       }
+
+      require("lspconfig").kotlin_language_server.setup {
+        server = {
+          capabilities = capabilities,
+          on_attach = on_attach,
+        },
+      }
     end,
   },
   {
@@ -167,6 +174,7 @@ return {
           "lua_ls",
           "jsonls",
           "rust_analyzer",
+          "kotlin_language_server",
         },
       }
     end,
