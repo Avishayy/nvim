@@ -128,6 +128,13 @@ return {
       require("lspconfig").pyright.setup {
         capabilities = capabilities,
         on_attach = on_attach,
+        before_init = function(params, config)
+          local Path = require("plenary.path")
+          local venv = Path:new((config.root_dir:gsub("/", Path.path.sep)), ".venv")
+          if venv:joinpath("bin"):is_dir() then
+            config.settings.python.pythonPath = tostring(venv:joinpath("bin", "python"))
+          end
+        end,
       }
 
       require("lspconfig").sourcekit.setup {
