@@ -137,7 +137,7 @@ return {
         end,
       }
 
-      require("lspconfig").sourcekit.setup {
+      require("lspconfig").clangd.setup {
         capabilities = capabilities,
         on_attach = on_attach,
       }
