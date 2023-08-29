@@ -154,6 +154,13 @@ return {
           on_attach = on_attach,
         },
       }
+
+      require("lspconfig").html.setup {
+        server = {
+          capabilities = capabilities,
+          on_attach = on_attach,
+        },
+      }
     end,
   },
   {
