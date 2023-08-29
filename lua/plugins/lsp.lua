@@ -161,6 +161,13 @@ return {
           on_attach = on_attach,
         },
       }
+
+      require("lspconfig").tailwindcss.setup {
+        server = {
+          capabilities = capabilities,
+          on_attach = on_attach,
+        },
+      }
     end,
   },
   {
