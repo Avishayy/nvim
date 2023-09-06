@@ -64,9 +64,42 @@ return {
             unicode_range = { "0590-05FF" },
             options = { -- `vim.o` options can be passed through here.
               delcombine = true,
-            }
-          }
-        }
+            },
+          },
+        },
+      }
+    end,
+  },
+  {
+    "nvim-neorg/neorg",
+    build = ":Neorg sync-parsers",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    lazy = false,
+    config = function()
+      require("neorg").setup {
+        load = {
+          ["core.defaults"] = {},  -- Loads default behaviour
+          ["core.concealer"] = {}, -- Adds pretty icons to your documents
+          ["core.dirman"] = {      -- Manages Neorg workspaces
+            config = {
+              workspaces = {
+                work = "~/notes",
+                personal = "~/personal_notes",
+              },
+            },
+          },
+          ["core.keybinds"] = {
+            config = {
+              hook = function(keybinds)
+                -- I want my regualar <CR> saves mapping
+                keybinds.unmap("norg", "n", "<CR>")
+
+                -- Can't use <C-Space> on my mac as I use it for language switch, CTRL-T is fine
+                keybinds.remap_key("norg", "n", "<C-Space>", "<C-t>")
+              end,
+            },
+          },
+        },
       }
     end,
   },
