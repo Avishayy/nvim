@@ -34,4 +34,7 @@ lazy.setup("plugins", {
     --      ["<localleader>t"] = false,
     --    },
   },
+  dev = {
+    path = "~/Projects/nvim_plugins_dev",
+  },
 })
