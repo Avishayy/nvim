@@ -91,14 +91,18 @@ return {
           ["core.keybinds"] = {
             config = {
               hook = function(keybinds)
-                -- I want my regualar <CR> saves mapping
-                keybinds.unmap("norg", "n", "<CR>")
+                -- I want my regualar <CR> saves mapping, use K instead
+                keybinds.remap_key("norg", "n", "<CR>", "K")
 
                 -- Can't use <C-Space> on my mac as I use it for language switch, CTRL-T is fine
                 keybinds.remap_key("norg", "n", "<C-Space>", "<C-t>")
               end,
             },
           },
+          -- Convert unordered lists to ordered lists or vice versa with <LL>LT
+          ["core.pivot"] = {},
+          -- Continue current type of item (heading, list, todo) with Alt-Enter
+          ["core.itero"] = {},
         },
       }
     end,
