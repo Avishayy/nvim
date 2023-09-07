@@ -57,6 +57,7 @@ return {
             end,
           },
         },
+        { name = "neorg" },
       },
 
       -- we use 'comleteopt=...,noselect' but we still want cmp to autoselect

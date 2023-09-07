@@ -107,6 +107,12 @@ return {
           ["core.pivot"] = {},
           -- Continue current type of item (heading, list, todo) with Alt-Enter
           ["core.itero"] = {},
+          -- Support completion in norg files
+          ["core.completion"] = {
+            config = {
+              engine = "nvim-cmp",
+            },
+          },
         },
       }
     end,
