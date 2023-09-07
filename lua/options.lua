@@ -85,3 +85,7 @@ lspSymbol("Error", "")
 lspSymbol("Hint", "")
 lspSymbol("Info", "")
 lspSymbol("Warning", "")
+
+-- Neorg fold levels should start deeper
+o.foldlevel = 2
+o.foldlevelstart = 2
